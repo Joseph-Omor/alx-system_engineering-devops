@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Bash script that pings an IP address passed as argument 5 times
 # If no argument is passed, it displays error:
-# Usage: information {IP_ADDRESS}
+# Usage: script_name {IP_ADDRESS}
 set -o pipefail
 
 if [ "$#" -eq 0 ]
