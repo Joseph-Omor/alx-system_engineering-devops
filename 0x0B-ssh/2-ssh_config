@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# A script that configures a Local SSH Client.
+# It configures it so you can connect without typing a password.
+# The SSH client is configured to use ~/.ssh/school
+# The SSH client is configured to refuse autentication using a password
+
+
