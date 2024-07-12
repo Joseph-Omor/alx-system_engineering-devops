@@ -1,0 +1,18 @@
+!/usr/bin/env bash
+# Install nginx web server
+# listen on port 80
+# when querying Nginx at its root / with a GET request using curl,
+# it must return a paget that contains the string Hello World!
+
+# Update package lists and install Nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+# Allow Nginx HTTP through the firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Create a custom HTML page with "Hello World!" message
+sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Restart Nginx to apply changes
+sudo service nginx restart
