@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script ensures Nginx is installed, running and listening 
+# on port 80 on all IPv4 IPs.
+apt-get -y update
+apt-get -y install nginx
+service nginx start
+sed -i "s/80 default_server/8080 default_server/" /etc/nginx/sites-available/default
+service nginx restart
