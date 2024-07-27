@@ -1,41 +1,20 @@
-!/usr/bin/env bash
-# This script installs an nginx web server
-# it will listen on port 80, 
+#!/usr/bin/env bash
+# This script installs and configures nginx
+# Set to listen on port 80 
 # when queried at its root / with a GET request using curl,
-# it must return a page that contains the string Hello World!
+# it returns a page with the string Hello World!
 
 # Update package lists and install Nginx
-sudo apt-get -y update
-sudo apt-get -y install nginx
+apt-get -y update
+apt-get -y install nginx
 
-# Allow Nginx HTTP through the firewall
-sudo ufw allow 'Nginx HTTP'
+# Ensure nginx is running
+service nginx start
 
-# Ensure the directory exists
-sudo mkdir -p /var/www/html/
-
-# Create a custom HTML page with "Hello World!" message
-echo "Hello World!" | sudo tee /var/www/html/index.html
-
-# Ensure the directory exists
-sudo mkdir -p /etc/nginx/sites-available/
-
-# Create a new Nginx server block configuration
-sudo tee /etc/nginx/sites-available/default << EOF
-server {
-	listen 80;
-	server_name _;
-
-	root /var/www/html;
-	index index.html;
-}
+# Write content to index.html
+cat > /var/www/html/index.html << EOF
+Hello World!
 EOF
 
-# create a symbolic link to enable the new configuration
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-
-# Test the Nginx configuration for syntax errors
-sudo nginx -t
-
-# Restart Nginx to apply changes without using systemctl
-sudo service nginx restart
+# Restart Nginx to apply changes
+nginx -s reload
